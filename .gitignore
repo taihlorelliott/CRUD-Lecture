@@ -1,0 +1,3 @@
+# do not update these items to github
+.env 
+node_modules
