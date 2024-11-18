@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits Index</title>
+</head>
+<body>
+    <h1>All Fruits</h1>
+    <ul>
+        <!-- no examining the variable so no = if 
+         examining and printing it as is to the dom use = -->
+        <% fruits.forEach(fruit => { %>
+            <li>
+                <a href="/fruits/<%=fruit._id%>">
+                 <%= fruit.name %>   
+                </a>
+            </li>
+        <% }); %>
+    </ul>
+    <!-- take me to another page -->
+        <a href="/fruits/new">Add New Fruits</a>
+</body>
+</html>
