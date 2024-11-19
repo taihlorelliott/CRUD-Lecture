@@ -7,6 +7,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 // require the method-override package to work
 const methodOverride = require("method-override");
+//require path to css
+const path = require("path");
 // require the morgan package to work
 const morgan = require('morgan');
 
@@ -26,6 +28,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 //helps with finding bugs sometimes, not 100% necessary
 // app.use(morgan("dev"));
+
+//add this middleware to server static files from the directory
+app.use(express.static(path.join(__dirname, "public")))
 
 
 //importing the fruit model (friut.js)
@@ -80,6 +85,17 @@ app.get("/fruits", async (req, res)=> {
     res.render("fruits/index.ejs", {
         fruits: allFruits
     })
+})
+
+// update your fruits page with this route
+app.put('/fruits/:fruitId', async (req, res) =>{
+    if (req.body.isReadyToEat === 'on'){
+        req.body.isReadyToEat = true
+    } else {
+        req.body.isReadyToEat = false
+    }
+    await Fruit.findByIdAndUpdate(req.params.fruitId, req.body)
+    res.redirect('/fruits')
 })
 
 app.listen(3001, () => {

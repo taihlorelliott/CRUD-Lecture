@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css link -->
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
     <title>Edit <%= fruit.name %> </title>
 </head>
 <body>
     <h1>Edit <%= fruit.name %> </h1>
-    <form>
+    <form action="/fruits/<%=fruit._id%>?_method=PUT" method="POST">
         <label for="name">Name:</label>
         <!-- value is what is pre-populated in the text box -->
         <input type="text" value="<%= fruit.name %>" name="name" id="name" />
 
         <label for="isReadyToEat">Ready to eat?</label>
         <input 
+            name="isReadyToEat"
             type ="checkbox" 
             <% if (fruit.isReadyToEat){ %>
              checked    
